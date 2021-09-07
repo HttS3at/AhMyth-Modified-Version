@@ -11,6 +11,7 @@
     value = .subannotation Landroidx/versionedparcelable/VersionedParcelize;
         allowSerialization = false
         deprecatedIds = {}
+        factory = V
         ignoreParcelables = false
         isCustom = false
         jetifyAs = ""
@@ -33,6 +34,9 @@
 .end method
 
 .method public abstract deprecatedIds()[I
+.end method
+
+.method public abstract factory()Ljava/lang/Class;
 .end method
 
 .method public abstract ignoreParcelables()Z

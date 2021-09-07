@@ -102,13 +102,15 @@ app.controller("AppCtrl", ($scope) => {
     // function to open the dialog and choose apk to be bindded
     $appCtrl.BrowseApk = () => {
         dialog.showOpenDialog(function(fileNames) {
+            
             // fileNames is an array that contains all the selected
-            if (fileNames === undefined) {
+            if (fileNames == undefined) {
                 $appCtrl.Log("No file selected");
             } else {
                 $appCtrl.Log("File choosen  " + fileNames[0]);
                 readFile(fileNames[0]); // read the file
             }
+            
         });
 
         function readFile(filepath) {
@@ -116,6 +118,7 @@ app.controller("AppCtrl", ($scope) => {
             $appCtrl.$apply();
         }
 
+        $appCtrl.Log("Opening file chooser window...");
     }
 
 
@@ -325,7 +328,7 @@ app.controller("AppCtrl", ($scope) => {
                     // generate a solid ahmyth apk
                     var filePath = $appCtrl.filePath;
                     if (filePath == null) {
-                        $appCtrl.Log("Browse the apk which you want to bind", CONSTANTS.logStatus.FAIL);
+                        $appCtrl.Log("Browse an apk file which you want to bind", CONSTANTS.logStatus.FAIL);
                         return;
                     } else if (!filePath.includes(".apk")) {
                         $appCtrl.Log("It is not an apk file", CONSTANTS.logStatus.FAIL);

@@ -186,21 +186,15 @@
 
     invoke-virtual {v0, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
 
-    move-result-object v0
-
     const-string v1, "; boundary="
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v0
 
     invoke-virtual {p1}, Lokio/ByteString;->utf8()Ljava/lang/String;
 
     move-result-object v1
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v0
 
     invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -243,7 +237,7 @@
 
     .local v2, "len":I
     :goto_0
-    if-ge v1, v2, :cond_3
+    if-ge v1, v2, :cond_0
 
     .line 203
     invoke-virtual {p1, v1}, Ljava/lang/String;->charAt(I)C
@@ -252,15 +246,7 @@
 
     .line 204
     .local v3, "ch":C
-    const/16 v4, 0xa
-
-    if-eq v3, v4, :cond_2
-
-    const/16 v4, 0xd
-
-    if-eq v3, v4, :cond_1
-
-    if-eq v3, v0, :cond_0
+    sparse-switch v3, :sswitch_data_0
 
     .line 215
     invoke-virtual {p0, v3}, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
@@ -268,7 +254,7 @@
     goto :goto_1
 
     .line 212
-    :cond_0
+    :sswitch_0
     const-string v4, "%22"
 
     invoke-virtual {p0, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
@@ -277,7 +263,7 @@
     goto :goto_1
 
     .line 209
-    :cond_1
+    :sswitch_1
     const-string v4, "%0D"
 
     invoke-virtual {p0, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
@@ -286,7 +272,7 @@
     goto :goto_1
 
     .line 206
-    :cond_2
+    :sswitch_2
     const-string v4, "%0A"
 
     invoke-virtual {p0, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
@@ -304,11 +290,18 @@
     .line 219
     .end local v1    # "i":I
     .end local v2    # "len":I
-    :cond_3
+    :cond_0
     invoke-virtual {p0, v0}, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
 
     .line 220
     return-object p0
+
+    :sswitch_data_0
+    .sparse-switch
+        0xa -> :sswitch_2
+        0xd -> :sswitch_1
+        0x22 -> :sswitch_0
+    .end sparse-switch
 .end method
 
 .method private writeOrCountBytes(Lokio/BufferedSink;Z)J

@@ -327,29 +327,21 @@
 .end method
 
 .method public isRedirect()Z
-    .locals 2
+    .locals 1
 
     .line 185
     iget v0, p0, Lokhttp3/Response;->code:I
 
-    const/16 v1, 0x133
-
-    if-eq v0, v1, :cond_0
-
-    const/16 v1, 0x134
-
-    if-eq v0, v1, :cond_0
-
     packed-switch v0, :pswitch_data_0
 
     .line 194
+    :pswitch_0
     const/4 v0, 0x0
 
     return v0
 
     .line 192
-    :cond_0
-    :pswitch_0
+    :pswitch_1
     const/4 v0, 0x1
 
     return v0
@@ -358,10 +350,15 @@
 
     :pswitch_data_0
     .packed-switch 0x12c
+        :pswitch_1
+        :pswitch_1
+        :pswitch_1
+        :pswitch_1
         :pswitch_0
         :pswitch_0
         :pswitch_0
-        :pswitch_0
+        :pswitch_1
+        :pswitch_1
     .end packed-switch
 .end method
 
@@ -554,43 +551,29 @@
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v0
-
     iget-object v1, p0, Lokhttp3/Response;->protocol:Lokhttp3/Protocol;
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
-
-    move-result-object v0
 
     const-string v1, ", code="
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v0
-
     iget v1, p0, Lokhttp3/Response;->code:I
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v0
 
     const-string v1, ", message="
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v0
-
     iget-object v1, p0, Lokhttp3/Response;->message:Ljava/lang/String;
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v0
-
     const-string v1, ", url="
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v0
 
     iget-object v1, p0, Lokhttp3/Response;->request:Lokhttp3/Request;
 
@@ -601,13 +584,9 @@
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
 
-    move-result-object v0
-
     const/16 v1, 0x7d
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
-
-    move-result-object v0
 
     invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 

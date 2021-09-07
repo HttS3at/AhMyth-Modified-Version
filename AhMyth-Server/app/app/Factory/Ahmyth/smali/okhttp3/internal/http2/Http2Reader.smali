@@ -970,7 +970,7 @@
     .line 236
     const/4 v0, 0x0
 
-    if-nez p4, :cond_c
+    if-nez p4, :cond_8
 
     .line 237
     and-int/lit8 v1, p3, 0x1
@@ -1004,7 +1004,7 @@
 
     const/4 v2, 0x1
 
-    if-nez v1, :cond_b
+    if-nez v1, :cond_7
 
     .line 244
     new-instance v1, Lokhttp3/internal/http2/Settings;
@@ -1017,7 +1017,7 @@
 
     .local v3, "i":I
     :goto_0
-    if-ge v3, p2, :cond_a
+    if-ge v3, p2, :cond_6
 
     .line 246
     iget-object v4, p0, Lokhttp3/internal/http2/Http2Reader;->source:Lokio/BufferedSource;
@@ -1036,38 +1036,28 @@
 
     .line 249
     .local v5, "value":I
-    const/4 v6, 0x2
-
-    if-eq v4, v6, :cond_7
-
-    const/4 v6, 0x3
-
-    if-eq v4, v6, :cond_6
-
-    const/4 v6, 0x4
-
-    if-eq v4, v6, :cond_4
-
-    const/4 v6, 0x5
-
-    if-eq v4, v6, :cond_2
+    packed-switch v4, :pswitch_data_0
 
     goto :goto_1
 
+    .line 272
+    :pswitch_0
+    goto :goto_1
+
     .line 267
-    :cond_2
+    :pswitch_1
     const/16 v6, 0x4000
 
-    if-lt v5, v6, :cond_3
+    if-lt v5, v6, :cond_2
 
     const v6, 0xffffff
 
-    if-gt v5, v6, :cond_3
+    if-gt v5, v6, :cond_2
 
     goto :goto_1
 
     .line 268
-    :cond_3
+    :cond_2
     new-array v2, v2, [Ljava/lang/Object;
 
     invoke-static {v5}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
@@ -1085,16 +1075,16 @@
     throw v0
 
     .line 261
-    :cond_4
+    :pswitch_2
     const/4 v4, 0x7
 
     .line 262
-    if-ltz v5, :cond_5
+    if-ltz v5, :cond_3
 
     goto :goto_1
 
     .line 263
-    :cond_5
+    :cond_3
     new-array v0, v0, [Ljava/lang/Object;
 
     const-string v2, "PROTOCOL_ERROR SETTINGS_INITIAL_WINDOW_SIZE > 2^31 - 1"
@@ -1106,22 +1096,22 @@
     throw v0
 
     .line 258
-    :cond_6
+    :pswitch_3
     const/4 v4, 0x4
 
     .line 259
     goto :goto_1
 
     .line 253
-    :cond_7
-    if-eqz v5, :cond_9
+    :pswitch_4
+    if-eqz v5, :cond_5
 
-    if-ne v5, v2, :cond_8
+    if-ne v5, v2, :cond_4
 
     goto :goto_1
 
     .line 254
-    :cond_8
+    :cond_4
     new-array v0, v0, [Ljava/lang/Object;
 
     const-string v2, "PROTOCOL_ERROR SETTINGS_ENABLE_PUSH != 0 or 1"
@@ -1132,8 +1122,12 @@
 
     throw v0
 
+    .line 251
+    :pswitch_5
+    nop
+
     .line 276
-    :cond_9
+    :cond_5
     :goto_1
     invoke-virtual {v1, v4, v5}, Lokhttp3/internal/http2/Settings;->set(II)Lokhttp3/internal/http2/Settings;
 
@@ -1146,7 +1140,7 @@
 
     .line 278
     .end local v3    # "i":I
-    :cond_a
+    :cond_6
     invoke-interface {p1, v0, v1}, Lokhttp3/internal/http2/Http2Reader$Handler;->settings(ZLokhttp3/internal/http2/Settings;)V
 
     .line 279
@@ -1154,7 +1148,7 @@
 
     .line 243
     .end local v1    # "settings":Lokhttp3/internal/http2/Settings;
-    :cond_b
+    :cond_7
     new-array v1, v2, [Ljava/lang/Object;
 
     invoke-static {p2}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
@@ -1172,7 +1166,7 @@
     throw v0
 
     .line 236
-    :cond_c
+    :cond_8
     new-array v0, v0, [Ljava/lang/Object;
 
     const-string v1, "TYPE_SETTINGS streamId != 0"
@@ -1188,6 +1182,18 @@
 
     :goto_3
     goto :goto_2
+
+    nop
+
+    :pswitch_data_0
+    .packed-switch 0x1
+        :pswitch_5
+        :pswitch_4
+        :pswitch_3
+        :pswitch_2
+        :pswitch_1
+        :pswitch_0
+    .end packed-switch
 .end method
 
 .method private readWindowUpdate(Lokhttp3/internal/http2/Http2Reader$Handler;IBI)V

@@ -1104,25 +1104,20 @@
 
     .local v0, "i":I
     :goto_0
-    if-ge v0, p2, :cond_3
+    if-ge v0, p2, :cond_2
 
     .line 1541
     invoke-virtual {p0, v0}, Ljava/lang/String;->charAt(I)C
 
     move-result v1
 
-    const/16 v2, 0x3a
-
-    if-eq v1, v2, :cond_2
-
-    const/16 v2, 0x5b
-
-    if-eq v1, v2, :cond_0
+    sparse-switch v1, :sswitch_data_0
 
     goto :goto_1
 
     .line 1543
     :cond_0
+    :sswitch_0
     add-int/lit8 v0, v0, 0x1
 
     if-ge v0, p2, :cond_1
@@ -1136,6 +1131,12 @@
 
     if-ne v1, v2, :cond_0
 
+    goto :goto_1
+
+    .line 1548
+    :sswitch_1
+    return v0
+
     .line 1540
     :cond_1
     :goto_1
@@ -1143,14 +1144,18 @@
 
     goto :goto_0
 
-    .line 1548
-    :cond_2
-    return v0
-
     .line 1551
     .end local v0    # "i":I
-    :cond_3
+    :cond_2
     return p2
+
+    nop
+
+    :sswitch_data_0
+    .sparse-switch
+        0x3a -> :sswitch_1
+        0x5b -> :sswitch_0
+    .end sparse-switch
 .end method
 
 .method private push(Ljava/lang/String;IIZZ)V
@@ -2123,11 +2128,7 @@
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v1
-
     invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v1
 
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -2305,11 +2306,7 @@
 
     invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v2
-
     invoke-virtual {v2, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v2
 
     invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -2454,7 +2451,7 @@
 
     .line 1306
     :cond_2
-    if-eqz v1, :cond_12
+    if-eqz v1, :cond_10
 
     .line 1307
     iget-object v2, v1, Lokhttp3/HttpUrl;->scheme:Ljava/lang/String;
@@ -2479,9 +2476,7 @@
     .local v14, "slashCount":I
     const/4 v4, 0x2
 
-    const/16 v15, 0x3f
-
-    const/16 v9, 0x23
+    const/16 v15, 0x23
 
     if-ge v14, v4, :cond_6
 
@@ -2545,7 +2540,7 @@
 
     move-result v4
 
-    if-ne v4, v9, :cond_5
+    if-ne v4, v15, :cond_5
 
     .line 1386
     :cond_4
@@ -2561,9 +2556,7 @@
 
     move/from16 v17, v3
 
-    const/16 v1, 0x23
-
-    goto/16 :goto_8
+    goto/16 :goto_7
 
     .line 1326
     :cond_6
@@ -2574,24 +2567,28 @@
 
     move/from16 v17, v3
 
+    move v9, v8
+
     .line 1329
     .end local v2    # "hasUsername":Z
     .end local v3    # "hasPassword":Z
+    .end local v8    # "pos":I
+    .local v9, "pos":I
     .local v16, "hasUsername":Z
     .local v17, "hasPassword":Z
     :goto_2
     const-string v2, "@/\\?#"
 
-    invoke-static {v10, v8, v11, v2}, Lokhttp3/internal/Util;->delimiterOffset(Ljava/lang/String;IILjava/lang/String;)I
+    invoke-static {v10, v9, v11, v2}, Lokhttp3/internal/Util;->delimiterOffset(Ljava/lang/String;IILjava/lang/String;)I
 
-    move-result v7
+    move-result v8
 
     .line 1330
-    .local v7, "componentDelimiterOffset":I
-    if-eq v7, v11, :cond_7
+    .local v8, "componentDelimiterOffset":I
+    if-eq v8, v11, :cond_7
 
     .line 1331
-    invoke-virtual {v10, v7}, Ljava/lang/String;->charAt(I)C
+    invoke-virtual {v10, v8}, Ljava/lang/String;->charAt(I)C
 
     move-result v2
 
@@ -2601,90 +2598,80 @@
     const/4 v2, -0x1
 
     :goto_3
-    move v6, v2
+    move/from16 v18, v2
 
     .line 1333
-    .local v6, "c":I
-    if-eq v6, v13, :cond_c
+    .local v18, "c":I
+    sparse-switch v18, :sswitch_data_0
 
-    if-eq v6, v9, :cond_c
+    move v15, v8
 
-    const/16 v2, 0x2f
+    move v8, v9
 
-    if-eq v6, v2, :cond_c
+    const/4 v3, -0x1
 
-    const/16 v2, 0x5c
+    const/16 v4, 0x23
 
-    if-eq v6, v2, :cond_c
-
-    if-eq v6, v15, :cond_c
-
-    const/16 v2, 0x40
-
-    if-eq v6, v2, :cond_8
-
-    const/16 v1, 0x23
-
-    goto/16 :goto_7
+    .end local v9    # "pos":I
+    .local v8, "pos":I
+    .local v15, "componentDelimiterOffset":I
+    goto/16 :goto_8
 
     .line 1336
-    :cond_8
-    const-string v5, "%40"
+    .end local v15    # "componentDelimiterOffset":I
+    .local v8, "componentDelimiterOffset":I
+    .restart local v9    # "pos":I
+    :sswitch_0
+    const-string v7, "%40"
 
-    if-nez v17, :cond_b
+    if-nez v17, :cond_a
 
     .line 1337
     const/16 v2, 0x3a
 
-    invoke-static {v10, v8, v7, v2}, Lokhttp3/internal/Util;->delimiterOffset(Ljava/lang/String;IIC)I
+    invoke-static {v10, v9, v8, v2}, Lokhttp3/internal/Util;->delimiterOffset(Ljava/lang/String;IIC)I
 
-    move-result v4
+    move-result v6
 
     .line 1339
-    .local v4, "passwordColonOffset":I
-    const/16 v18, 0x1
-
-    const/16 v19, 0x0
+    .local v6, "passwordColonOffset":I
+    const/16 v19, 0x1
 
     const/16 v20, 0x0
 
-    const/16 v21, 0x1
+    const/16 v21, 0x0
 
-    const-string v22, " \"\':;<=>@[]^`{}|/\\?#"
+    const/16 v22, 0x1
+
+    const-string v5, " \"\':;<=>@[]^`{}|/\\?#"
 
     move-object/from16 v2, p2
 
-    move v3, v8
+    move v3, v9
 
-    move/from16 v23, v4
+    move v4, v6
 
-    .end local v4    # "passwordColonOffset":I
-    .local v23, "passwordColonOffset":I
-    move-object v15, v5
+    move v15, v6
 
-    move-object/from16 v5, v22
+    .end local v6    # "passwordColonOffset":I
+    .local v15, "passwordColonOffset":I
+    move/from16 v6, v19
 
-    move/from16 v22, v6
+    move-object v13, v7
 
-    .end local v6    # "c":I
-    .local v22, "c":I
-    move/from16 v6, v18
+    move/from16 v7, v20
 
-    move v13, v7
+    move/from16 v23, v8
 
-    .end local v7    # "componentDelimiterOffset":I
-    .local v13, "componentDelimiterOffset":I
-    move/from16 v7, v19
+    .end local v8    # "componentDelimiterOffset":I
+    .local v23, "componentDelimiterOffset":I
+    move/from16 v8, v21
 
-    move/from16 v19, v8
+    move/from16 v20, v9
 
-    .end local v8    # "pos":I
-    .local v19, "pos":I
-    move/from16 v8, v20
-
-    const/16 v1, 0x23
-
-    move/from16 v9, v21
+    .end local v9    # "pos":I
+    .local v20, "pos":I
+    move/from16 v9, v22
 
     invoke-static/range {v2 .. v9}, Lokhttp3/HttpUrl;->canonicalize(Ljava/lang/String;IILjava/lang/String;ZZZZ)Ljava/lang/String;
 
@@ -2692,7 +2679,7 @@
 
     .line 1341
     .local v9, "canonicalUsername":Ljava/lang/String;
-    if-eqz v16, :cond_9
+    if-eqz v16, :cond_8
 
     new-instance v2, Ljava/lang/StringBuilder;
 
@@ -2702,15 +2689,9 @@
 
     invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v2
-
-    invoke-virtual {v2, v15}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v2
+    invoke-virtual {v2, v13}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     invoke-virtual {v2, v9}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v2
 
     invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -2718,18 +2699,18 @@
 
     goto :goto_4
 
-    :cond_9
+    :cond_8
     move-object v2, v9
 
     :goto_4
     iput-object v2, v0, Lokhttp3/HttpUrl$Builder;->encodedUsername:Ljava/lang/String;
 
     .line 1344
-    move/from16 v15, v23
+    move/from16 v13, v23
 
-    .end local v23    # "passwordColonOffset":I
-    .local v15, "passwordColonOffset":I
-    if-eq v15, v13, :cond_a
+    .end local v23    # "componentDelimiterOffset":I
+    .local v13, "componentDelimiterOffset":I
+    if-eq v15, v13, :cond_9
 
     .line 1345
     const/16 v17, 0x1
@@ -2743,7 +2724,7 @@
 
     const/4 v8, 0x0
 
-    const/16 v20, 0x1
+    const/16 v21, 0x1
 
     const-string v5, " \"\':;<=>@[]^`{}|/\\?#"
 
@@ -2751,11 +2732,11 @@
 
     move v4, v13
 
-    move-object/from16 v21, v9
+    move-object/from16 v22, v9
 
     .end local v9    # "canonicalUsername":Ljava/lang/String;
-    .local v21, "canonicalUsername":Ljava/lang/String;
-    move/from16 v9, v20
+    .local v22, "canonicalUsername":Ljava/lang/String;
+    move/from16 v9, v21
 
     invoke-static/range {v2 .. v9}, Lokhttp3/HttpUrl;->canonicalize(Ljava/lang/String;IILjava/lang/String;ZZZZ)Ljava/lang/String;
 
@@ -2766,59 +2747,49 @@
     goto :goto_5
 
     .line 1344
-    .end local v21    # "canonicalUsername":Ljava/lang/String;
+    .end local v22    # "canonicalUsername":Ljava/lang/String;
     .restart local v9    # "canonicalUsername":Ljava/lang/String;
-    :cond_a
-    move-object/from16 v21, v9
+    :cond_9
+    move-object/from16 v22, v9
 
     .line 1349
     .end local v9    # "canonicalUsername":Ljava/lang/String;
-    .restart local v21    # "canonicalUsername":Ljava/lang/String;
+    .restart local v22    # "canonicalUsername":Ljava/lang/String;
     :goto_5
     const/16 v16, 0x1
 
     .line 1350
     .end local v15    # "passwordColonOffset":I
-    .end local v21    # "canonicalUsername":Ljava/lang/String;
+    .end local v22    # "canonicalUsername":Ljava/lang/String;
+    move v15, v13
+
     goto :goto_6
 
     .line 1351
     .end local v13    # "componentDelimiterOffset":I
-    .end local v19    # "pos":I
-    .end local v22    # "c":I
-    .restart local v6    # "c":I
-    .restart local v7    # "componentDelimiterOffset":I
-    .restart local v8    # "pos":I
-    :cond_b
-    move-object v15, v5
+    .end local v20    # "pos":I
+    .restart local v8    # "componentDelimiterOffset":I
+    .local v9, "pos":I
+    :cond_a
+    move-object v13, v7
 
-    move/from16 v22, v6
+    move v15, v8
 
-    move v13, v7
+    move/from16 v20, v9
 
-    move/from16 v19, v8
+    .end local v8    # "componentDelimiterOffset":I
+    .end local v9    # "pos":I
+    .local v15, "componentDelimiterOffset":I
+    .restart local v20    # "pos":I
+    new-instance v9, Ljava/lang/StringBuilder;
 
-    const/16 v1, 0x23
+    invoke-direct {v9}, Ljava/lang/StringBuilder;-><init>()V
 
-    .end local v6    # "c":I
-    .end local v7    # "componentDelimiterOffset":I
-    .end local v8    # "pos":I
-    .restart local v13    # "componentDelimiterOffset":I
-    .restart local v19    # "pos":I
-    .restart local v22    # "c":I
-    new-instance v2, Ljava/lang/StringBuilder;
+    iget-object v2, v0, Lokhttp3/HttpUrl$Builder;->encodedPassword:Ljava/lang/String;
 
-    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-virtual {v9, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    iget-object v3, v0, Lokhttp3/HttpUrl$Builder;->encodedPassword:Ljava/lang/String;
-
-    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v2
-
-    invoke-virtual {v2, v15}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v15
+    invoke-virtual {v9, v13}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     const/4 v6, 0x1
 
@@ -2826,186 +2797,174 @@
 
     const/4 v8, 0x0
 
-    const/4 v9, 0x1
+    const/4 v13, 0x1
 
     const-string v5, " \"\':;<=>@[]^`{}|/\\?#"
 
     move-object/from16 v2, p2
 
-    move/from16 v3, v19
+    move/from16 v3, v20
 
-    move v4, v13
+    move v4, v15
+
+    move-object v1, v9
+
+    move v9, v13
 
     invoke-static/range {v2 .. v9}, Lokhttp3/HttpUrl;->canonicalize(Ljava/lang/String;IILjava/lang/String;ZZZZ)Ljava/lang/String;
 
     move-result-object v2
 
-    invoke-virtual {v15, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v2
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    move-result-object v1
 
-    move-result-object v2
-
-    iput-object v2, v0, Lokhttp3/HttpUrl$Builder;->encodedPassword:Ljava/lang/String;
+    iput-object v1, v0, Lokhttp3/HttpUrl$Builder;->encodedPassword:Ljava/lang/String;
 
     .line 1354
     :goto_6
-    add-int/lit8 v7, v13, 0x1
+    add-int/lit8 v8, v15, 0x1
 
     .line 1355
-    .end local v19    # "pos":I
-    .local v7, "pos":I
-    move v8, v7
+    .end local v20    # "pos":I
+    .local v8, "pos":I
+    move v9, v8
 
-    .line 1376
-    .end local v7    # "pos":I
-    .end local v13    # "componentDelimiterOffset":I
-    .end local v22    # "c":I
-    .restart local v8    # "pos":I
-    :goto_7
-    move-object/from16 v1, p1
+    const/4 v3, -0x1
 
-    const/16 v9, 0x23
+    const/16 v4, 0x23
 
-    const/4 v13, -0x1
-
-    const/16 v15, 0x3f
-
-    goto/16 :goto_2
-
-    .line 1333
-    .restart local v6    # "c":I
-    .local v7, "componentDelimiterOffset":I
-    :cond_c
-    move/from16 v22, v6
-
-    move v13, v7
-
-    move/from16 v19, v8
-
-    const/16 v1, 0x23
+    goto/16 :goto_8
 
     .line 1363
-    .end local v6    # "c":I
-    .end local v7    # "componentDelimiterOffset":I
-    .end local v8    # "pos":I
-    .restart local v13    # "componentDelimiterOffset":I
-    .restart local v19    # "pos":I
-    .restart local v22    # "c":I
-    move/from16 v8, v19
+    .end local v15    # "componentDelimiterOffset":I
+    .local v8, "componentDelimiterOffset":I
+    .restart local v9    # "pos":I
+    :sswitch_1
+    move v15, v8
 
-    .end local v19    # "pos":I
-    .restart local v8    # "pos":I
-    invoke-static {v10, v8, v13}, Lokhttp3/HttpUrl$Builder;->portColonOffset(Ljava/lang/String;II)I
+    move/from16 v20, v9
+
+    .end local v8    # "componentDelimiterOffset":I
+    .end local v9    # "pos":I
+    .restart local v15    # "componentDelimiterOffset":I
+    .restart local v20    # "pos":I
+    move/from16 v8, v20
+
+    .end local v20    # "pos":I
+    .local v8, "pos":I
+    invoke-static {v10, v8, v15}, Lokhttp3/HttpUrl$Builder;->portColonOffset(Ljava/lang/String;II)I
+
+    move-result v1
+
+    .line 1364
+    .local v1, "portColonOffset":I
+    add-int/lit8 v2, v1, 0x1
+
+    if-ge v2, v15, :cond_b
+
+    .line 1365
+    invoke-static {v10, v8, v1}, Lokhttp3/HttpUrl$Builder;->canonicalizeHost(Ljava/lang/String;II)Ljava/lang/String;
+
+    move-result-object v2
+
+    iput-object v2, v0, Lokhttp3/HttpUrl$Builder;->host:Ljava/lang/String;
+
+    .line 1366
+    add-int/lit8 v2, v1, 0x1
+
+    invoke-static {v10, v2, v15}, Lokhttp3/HttpUrl$Builder;->parsePort(Ljava/lang/String;II)I
 
     move-result v2
 
-    .line 1364
-    .local v2, "portColonOffset":I
-    add-int/lit8 v3, v2, 0x1
-
-    if-ge v3, v13, :cond_d
-
-    .line 1365
-    invoke-static {v10, v8, v2}, Lokhttp3/HttpUrl$Builder;->canonicalizeHost(Ljava/lang/String;II)Ljava/lang/String;
-
-    move-result-object v3
-
-    iput-object v3, v0, Lokhttp3/HttpUrl$Builder;->host:Ljava/lang/String;
-
-    .line 1366
-    add-int/lit8 v3, v2, 0x1
-
-    invoke-static {v10, v3, v13}, Lokhttp3/HttpUrl$Builder;->parsePort(Ljava/lang/String;II)I
-
-    move-result v3
-
-    iput v3, v0, Lokhttp3/HttpUrl$Builder;->port:I
+    iput v2, v0, Lokhttp3/HttpUrl$Builder;->port:I
 
     .line 1367
-    const/4 v4, -0x1
+    const/4 v3, -0x1
 
-    if-ne v3, v4, :cond_e
+    if-ne v2, v3, :cond_c
 
-    sget-object v1, Lokhttp3/HttpUrl$Builder$ParseResult;->INVALID_PORT:Lokhttp3/HttpUrl$Builder$ParseResult;
+    sget-object v2, Lokhttp3/HttpUrl$Builder$ParseResult;->INVALID_PORT:Lokhttp3/HttpUrl$Builder$ParseResult;
 
-    return-object v1
+    return-object v2
 
     .line 1369
-    :cond_d
-    invoke-static {v10, v8, v2}, Lokhttp3/HttpUrl$Builder;->canonicalizeHost(Ljava/lang/String;II)Ljava/lang/String;
+    :cond_b
+    invoke-static {v10, v8, v1}, Lokhttp3/HttpUrl$Builder;->canonicalizeHost(Ljava/lang/String;II)Ljava/lang/String;
 
-    move-result-object v3
+    move-result-object v2
 
-    iput-object v3, v0, Lokhttp3/HttpUrl$Builder;->host:Ljava/lang/String;
+    iput-object v2, v0, Lokhttp3/HttpUrl$Builder;->host:Ljava/lang/String;
 
     .line 1370
-    iget-object v3, v0, Lokhttp3/HttpUrl$Builder;->scheme:Ljava/lang/String;
+    iget-object v2, v0, Lokhttp3/HttpUrl$Builder;->scheme:Ljava/lang/String;
 
-    invoke-static {v3}, Lokhttp3/HttpUrl;->defaultPort(Ljava/lang/String;)I
+    invoke-static {v2}, Lokhttp3/HttpUrl;->defaultPort(Ljava/lang/String;)I
 
-    move-result v3
+    move-result v2
 
-    iput v3, v0, Lokhttp3/HttpUrl$Builder;->port:I
+    iput v2, v0, Lokhttp3/HttpUrl$Builder;->port:I
 
     .line 1372
-    :cond_e
-    iget-object v3, v0, Lokhttp3/HttpUrl$Builder;->host:Ljava/lang/String;
+    :cond_c
+    iget-object v2, v0, Lokhttp3/HttpUrl$Builder;->host:Ljava/lang/String;
 
-    if-nez v3, :cond_f
+    if-nez v2, :cond_d
 
-    sget-object v1, Lokhttp3/HttpUrl$Builder$ParseResult;->INVALID_HOST:Lokhttp3/HttpUrl$Builder$ParseResult;
+    sget-object v2, Lokhttp3/HttpUrl$Builder$ParseResult;->INVALID_HOST:Lokhttp3/HttpUrl$Builder$ParseResult;
 
-    return-object v1
+    return-object v2
 
     .line 1373
-    :cond_f
-    move v8, v13
+    :cond_d
+    move v8, v15
 
     .line 1374
     nop
 
     .line 1391
-    .end local v2    # "portColonOffset":I
-    .end local v13    # "componentDelimiterOffset":I
-    .end local v22    # "c":I
-    :goto_8
-    const-string v2, "?#"
+    .end local v1    # "portColonOffset":I
+    .end local v15    # "componentDelimiterOffset":I
+    .end local v18    # "c":I
+    :goto_7
+    const-string v1, "?#"
 
-    invoke-static {v10, v8, v11, v2}, Lokhttp3/internal/Util;->delimiterOffset(Ljava/lang/String;IILjava/lang/String;)I
+    invoke-static {v10, v8, v11, v1}, Lokhttp3/internal/Util;->delimiterOffset(Ljava/lang/String;IILjava/lang/String;)I
 
-    move-result v13
+    move-result v1
 
     .line 1392
-    .local v13, "pathDelimiterOffset":I
-    invoke-direct {v0, v10, v8, v13}, Lokhttp3/HttpUrl$Builder;->resolvePath(Ljava/lang/String;II)V
+    .local v1, "pathDelimiterOffset":I
+    invoke-direct {v0, v10, v8, v1}, Lokhttp3/HttpUrl$Builder;->resolvePath(Ljava/lang/String;II)V
 
     .line 1393
-    move v15, v13
+    move v13, v1
 
     .line 1396
     .end local v8    # "pos":I
-    .local v15, "pos":I
-    if-ge v15, v11, :cond_10
+    .local v13, "pos":I
+    if-ge v13, v11, :cond_e
 
-    invoke-virtual {v10, v15}, Ljava/lang/String;->charAt(I)C
+    invoke-virtual {v10, v13}, Ljava/lang/String;->charAt(I)C
 
     move-result v2
 
     const/16 v3, 0x3f
 
-    if-ne v2, v3, :cond_10
+    if-ne v2, v3, :cond_e
 
     .line 1397
-    invoke-static {v10, v15, v11, v1}, Lokhttp3/internal/Util;->delimiterOffset(Ljava/lang/String;IIC)I
+    const/16 v2, 0x23
 
-    move-result v18
+    invoke-static {v10, v13, v11, v2}, Lokhttp3/internal/Util;->delimiterOffset(Ljava/lang/String;IIC)I
+
+    move-result v15
 
     .line 1398
-    .local v18, "queryDelimiterOffset":I
-    add-int/lit8 v3, v15, 0x1
+    .local v15, "queryDelimiterOffset":I
+    add-int/lit8 v3, v13, 0x1
 
     const/4 v6, 0x1
 
@@ -3019,7 +2978,7 @@
 
     move-object/from16 v2, p2
 
-    move/from16 v4, v18
+    move v4, v15
 
     invoke-static/range {v2 .. v9}, Lokhttp3/HttpUrl;->canonicalize(Ljava/lang/String;IILjava/lang/String;ZZZZ)Ljava/lang/String;
 
@@ -3032,21 +2991,23 @@
     iput-object v2, v0, Lokhttp3/HttpUrl$Builder;->encodedQueryNamesAndValues:Ljava/util/List;
 
     .line 1400
-    move/from16 v15, v18
+    move v13, v15
 
     .line 1404
-    .end local v18    # "queryDelimiterOffset":I
-    :cond_10
-    if-ge v15, v11, :cond_11
+    .end local v15    # "queryDelimiterOffset":I
+    :cond_e
+    if-ge v13, v11, :cond_f
 
-    invoke-virtual {v10, v15}, Ljava/lang/String;->charAt(I)C
+    invoke-virtual {v10, v13}, Ljava/lang/String;->charAt(I)C
 
     move-result v2
 
-    if-ne v2, v1, :cond_11
+    const/16 v4, 0x23
+
+    if-ne v2, v4, :cond_f
 
     .line 1405
-    add-int/lit8 v3, v15, 0x1
+    add-int/lit8 v3, v13, 0x1
 
     const/4 v6, 0x1
 
@@ -3064,27 +3025,49 @@
 
     invoke-static/range {v2 .. v9}, Lokhttp3/HttpUrl;->canonicalize(Ljava/lang/String;IILjava/lang/String;ZZZZ)Ljava/lang/String;
 
-    move-result-object v1
+    move-result-object v2
 
-    iput-object v1, v0, Lokhttp3/HttpUrl$Builder;->encodedFragment:Ljava/lang/String;
+    iput-object v2, v0, Lokhttp3/HttpUrl$Builder;->encodedFragment:Ljava/lang/String;
 
     .line 1409
-    :cond_11
-    sget-object v1, Lokhttp3/HttpUrl$Builder$ParseResult;->SUCCESS:Lokhttp3/HttpUrl$Builder$ParseResult;
+    :cond_f
+    sget-object v2, Lokhttp3/HttpUrl$Builder$ParseResult;->SUCCESS:Lokhttp3/HttpUrl$Builder$ParseResult;
 
-    return-object v1
+    return-object v2
+
+    .line 1376
+    .end local v1    # "pathDelimiterOffset":I
+    .end local v13    # "pos":I
+    .restart local v9    # "pos":I
+    :goto_8
+    move-object/from16 v1, p1
+
+    const/4 v13, -0x1
+
+    const/16 v15, 0x23
+
+    goto/16 :goto_2
 
     .line 1309
-    .end local v13    # "pathDelimiterOffset":I
+    .end local v9    # "pos":I
     .end local v14    # "slashCount":I
-    .end local v15    # "pos":I
     .end local v16    # "hasUsername":Z
     .end local v17    # "hasPassword":Z
     .restart local v8    # "pos":I
-    :cond_12
+    :cond_10
     sget-object v1, Lokhttp3/HttpUrl$Builder$ParseResult;->MISSING_SCHEME:Lokhttp3/HttpUrl$Builder$ParseResult;
 
     return-object v1
+
+    :sswitch_data_0
+    .sparse-switch
+        -0x1 -> :sswitch_1
+        0x23 -> :sswitch_1
+        0x2f -> :sswitch_1
+        0x3f -> :sswitch_1
+        0x40 -> :sswitch_0
+        0x5c -> :sswitch_1
+    .end sparse-switch
 .end method
 
 .method public password(Ljava/lang/String;)Lokhttp3/HttpUrl$Builder;
@@ -3156,11 +3139,7 @@
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v1
-
     invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v1
 
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -3541,11 +3520,7 @@
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v1
-
     invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v1
 
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -3633,11 +3608,7 @@
 
     invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v2
-
     invoke-virtual {v2, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v2
 
     invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -3741,11 +3712,7 @@
 
     invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v2
-
     invoke-virtual {v2, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v2
 
     invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 

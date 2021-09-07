@@ -775,13 +775,7 @@
 
     aget v2, v2, v3
 
-    const/4 v3, 0x1
-
-    if-eq v2, v3, :cond_1
-
-    const/4 v3, 0x2
-
-    if-eq v2, v3, :cond_0
+    packed-switch v2, :pswitch_data_0
 
     .line 928
     new-instance v2, Ljava/net/MalformedURLException;
@@ -794,21 +788,13 @@
 
     invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v3
-
     invoke-virtual {v3, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
-
-    move-result-object v3
 
     const-string v4, " for "
 
     invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v3
-
     invoke-virtual {v3, p0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v3
 
     invoke-virtual {v3}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -819,7 +805,7 @@
     throw v2
 
     .line 923
-    :cond_0
+    :pswitch_0
     new-instance v2, Ljava/net/UnknownHostException;
 
     new-instance v3, Ljava/lang/StringBuilder;
@@ -830,11 +816,7 @@
 
     invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v3
-
     invoke-virtual {v3, p0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v3
 
     invoke-virtual {v3}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -845,12 +827,18 @@
     throw v2
 
     .line 921
-    :cond_1
+    :pswitch_1
     invoke-virtual {v0}, Lokhttp3/HttpUrl$Builder;->build()Lokhttp3/HttpUrl;
 
     move-result-object v2
 
     return-object v2
+
+    :pswitch_data_0
+    .packed-switch 0x1
+        :pswitch_1
+        :pswitch_0
+    .end packed-switch
 .end method
 
 .method static namesAndValuesToQueryString(Ljava/lang/StringBuilder;Ljava/util/List;)V

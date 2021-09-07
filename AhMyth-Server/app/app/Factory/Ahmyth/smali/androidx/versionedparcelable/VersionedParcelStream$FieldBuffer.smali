@@ -30,30 +30,30 @@
     .param p1, "fieldId"    # I
     .param p2, "target"    # Ljava/io/DataOutputStream;
 
-    .line 488
+    .line 549
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
-    .line 483
+    .line 544
     new-instance v0, Ljava/io/ByteArrayOutputStream;
 
     invoke-direct {v0}, Ljava/io/ByteArrayOutputStream;-><init>()V
 
     iput-object v0, p0, Landroidx/versionedparcelable/VersionedParcelStream$FieldBuffer;->mOutput:Ljava/io/ByteArrayOutputStream;
 
-    .line 484
+    .line 545
     new-instance v1, Ljava/io/DataOutputStream;
 
     invoke-direct {v1, v0}, Ljava/io/DataOutputStream;-><init>(Ljava/io/OutputStream;)V
 
     iput-object v1, p0, Landroidx/versionedparcelable/VersionedParcelStream$FieldBuffer;->mDataStream:Ljava/io/DataOutputStream;
 
-    .line 489
+    .line 550
     iput p1, p0, Landroidx/versionedparcelable/VersionedParcelStream$FieldBuffer;->mFieldId:I
 
-    .line 490
+    .line 551
     iput-object p2, p0, Landroidx/versionedparcelable/VersionedParcelStream$FieldBuffer;->mTarget:Ljava/io/DataOutputStream;
 
-    .line 491
+    .line 552
     return-void
 .end method
 
@@ -67,19 +67,19 @@
         }
     .end annotation
 
-    .line 494
+    .line 555
     iget-object v0, p0, Landroidx/versionedparcelable/VersionedParcelStream$FieldBuffer;->mDataStream:Ljava/io/DataOutputStream;
 
     invoke-virtual {v0}, Ljava/io/DataOutputStream;->flush()V
 
-    .line 495
+    .line 556
     iget-object v0, p0, Landroidx/versionedparcelable/VersionedParcelStream$FieldBuffer;->mOutput:Ljava/io/ByteArrayOutputStream;
 
     invoke-virtual {v0}, Ljava/io/ByteArrayOutputStream;->size()I
 
     move-result v0
 
-    .line 496
+    .line 557
     .local v0, "size":I
     iget v1, p0, Landroidx/versionedparcelable/VersionedParcelStream$FieldBuffer;->mFieldId:I
 
@@ -99,21 +99,21 @@
     :goto_0
     or-int/2addr v1, v3
 
-    .line 497
+    .line 558
     .local v1, "fieldInfo":I
     iget-object v3, p0, Landroidx/versionedparcelable/VersionedParcelStream$FieldBuffer;->mTarget:Ljava/io/DataOutputStream;
 
     invoke-virtual {v3, v1}, Ljava/io/DataOutputStream;->writeInt(I)V
 
-    .line 498
+    .line 559
     if-lt v0, v2, :cond_1
 
-    .line 499
+    .line 560
     iget-object v2, p0, Landroidx/versionedparcelable/VersionedParcelStream$FieldBuffer;->mTarget:Ljava/io/DataOutputStream;
 
     invoke-virtual {v2, v0}, Ljava/io/DataOutputStream;->writeInt(I)V
 
-    .line 501
+    .line 562
     :cond_1
     iget-object v2, p0, Landroidx/versionedparcelable/VersionedParcelStream$FieldBuffer;->mOutput:Ljava/io/ByteArrayOutputStream;
 
@@ -121,6 +121,6 @@
 
     invoke-virtual {v2, v3}, Ljava/io/ByteArrayOutputStream;->writeTo(Ljava/io/OutputStream;)V
 
-    .line 502
+    .line 563
     return-void
 .end method

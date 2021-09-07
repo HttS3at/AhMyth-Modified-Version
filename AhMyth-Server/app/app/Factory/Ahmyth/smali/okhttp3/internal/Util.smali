@@ -831,8 +831,6 @@
 
     invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v0
-
     .line 229
     invoke-virtual {p0}, Lokhttp3/HttpUrl;->host()Ljava/lang/String;
 
@@ -840,13 +838,9 @@
 
     invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v0
-
     const-string v2, "]"
 
     invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v0
 
     invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -898,22 +892,16 @@
 
     invoke-virtual {v2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v2
-
     invoke-virtual {v2, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v1
 
     .line 232
     invoke-virtual {p0}, Lokhttp3/HttpUrl;->port()I
 
-    move-result v2
+    move-result v1
 
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+    invoke-virtual {v2, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
 
-    move-result-object v1
-
-    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
     move-result-object v1
 
@@ -1385,7 +1373,7 @@
 .end method
 
 .method public static skipLeadingAsciiWhitespace(Ljava/lang/String;II)I
-    .locals 3
+    .locals 2
     .param p0, "input"    # Ljava/lang/String;
     .param p1, "pos"    # I
     .param p2, "limit"    # I
@@ -1395,38 +1383,20 @@
 
     .local v0, "i":I
     :goto_0
-    if-ge v0, p2, :cond_1
+    if-ge v0, p2, :cond_0
 
     .line 282
     invoke-virtual {p0, v0}, Ljava/lang/String;->charAt(I)C
 
     move-result v1
 
-    const/16 v2, 0x9
-
-    if-eq v1, v2, :cond_0
-
-    const/16 v2, 0xa
-
-    if-eq v1, v2, :cond_0
-
-    const/16 v2, 0xc
-
-    if-eq v1, v2, :cond_0
-
-    const/16 v2, 0xd
-
-    if-eq v1, v2, :cond_0
-
-    const/16 v2, 0x20
-
-    if-eq v1, v2, :cond_0
+    sparse-switch v1, :sswitch_data_0
 
     .line 290
     return v0
 
     .line 288
-    :cond_0
+    :sswitch_0
     nop
 
     .line 281
@@ -1436,12 +1406,21 @@
 
     .line 293
     .end local v0    # "i":I
-    :cond_1
+    :cond_0
     return p2
+
+    :sswitch_data_0
+    .sparse-switch
+        0x9 -> :sswitch_0
+        0xa -> :sswitch_0
+        0xc -> :sswitch_0
+        0xd -> :sswitch_0
+        0x20 -> :sswitch_0
+    .end sparse-switch
 .end method
 
 .method public static skipTrailingAsciiWhitespace(Ljava/lang/String;II)I
-    .locals 3
+    .locals 2
     .param p0, "input"    # Ljava/lang/String;
     .param p1, "pos"    # I
     .param p2, "limit"    # I
@@ -1451,32 +1430,14 @@
 
     .local v0, "i":I
     :goto_0
-    if-lt v0, p1, :cond_1
+    if-lt v0, p1, :cond_0
 
     .line 302
     invoke-virtual {p0, v0}, Ljava/lang/String;->charAt(I)C
 
     move-result v1
 
-    const/16 v2, 0x9
-
-    if-eq v1, v2, :cond_0
-
-    const/16 v2, 0xa
-
-    if-eq v1, v2, :cond_0
-
-    const/16 v2, 0xc
-
-    if-eq v1, v2, :cond_0
-
-    const/16 v2, 0xd
-
-    if-eq v1, v2, :cond_0
-
-    const/16 v2, 0x20
-
-    if-eq v1, v2, :cond_0
+    sparse-switch v1, :sswitch_data_0
 
     .line 310
     add-int/lit8 v1, v0, 0x1
@@ -1484,7 +1445,7 @@
     return v1
 
     .line 308
-    :cond_0
+    :sswitch_0
     nop
 
     .line 301
@@ -1494,8 +1455,19 @@
 
     .line 313
     .end local v0    # "i":I
-    :cond_1
+    :cond_0
     return p1
+
+    nop
+
+    :sswitch_data_0
+    .sparse-switch
+        0x9 -> :sswitch_0
+        0xa -> :sswitch_0
+        0xc -> :sswitch_0
+        0xd -> :sswitch_0
+        0x20 -> :sswitch_0
+    .end sparse-switch
 .end method
 
 .method public static threadFactory(Ljava/lang/String;Z)Ljava/util/concurrent/ThreadFactory;

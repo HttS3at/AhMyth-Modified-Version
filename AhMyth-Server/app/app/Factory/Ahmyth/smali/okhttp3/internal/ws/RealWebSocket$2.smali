@@ -112,8 +112,6 @@
 
     invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v2
-
     iget-object v3, p0, Lokhttp3/internal/ws/RealWebSocket$2;->val$request:Lokhttp3/Request;
 
     invoke-virtual {v3}, Lokhttp3/Request;->url()Lokhttp3/HttpUrl;
@@ -125,8 +123,6 @@
     move-result-object v3
 
     invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v2
 
     invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 

@@ -142,7 +142,7 @@
 .end method
 
 .method public static forJavaName(Ljava/lang/String;)Lokhttp3/TlsVersion;
-    .locals 6
+    .locals 3
     .param p0, "javaName"    # Ljava/lang/String;
 
     .line 37
@@ -150,67 +150,12 @@
 
     move-result v0
 
-    const v1, 0x4b88569
-
-    const/4 v2, 0x4
-
-    const/4 v3, 0x3
-
-    const/4 v4, 0x2
-
-    const/4 v5, 0x1
-
-    if-eq v0, v1, :cond_2
-
-    const v1, 0x4c38896
-
-    if-eq v0, v1, :cond_1
-
-    packed-switch v0, :pswitch_data_0
+    sparse-switch v0, :sswitch_data_0
 
     :cond_0
     goto :goto_0
 
-    :pswitch_0
-    const-string v0, "TLSv1.3"
-
-    invoke-virtual {p0, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
-
-    move-result v0
-
-    if-eqz v0, :cond_0
-
-    const/4 v0, 0x0
-
-    goto :goto_1
-
-    :pswitch_1
-    const-string v0, "TLSv1.2"
-
-    invoke-virtual {p0, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
-
-    move-result v0
-
-    if-eqz v0, :cond_0
-
-    const/4 v0, 0x1
-
-    goto :goto_1
-
-    :pswitch_2
-    const-string v0, "TLSv1.1"
-
-    invoke-virtual {p0, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
-
-    move-result v0
-
-    if-eqz v0, :cond_0
-
-    const/4 v0, 0x2
-
-    goto :goto_1
-
-    :cond_1
+    :sswitch_0
     const-string v0, "TLSv1"
 
     invoke-virtual {p0, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
@@ -223,7 +168,7 @@
 
     goto :goto_1
 
-    :cond_2
+    :sswitch_1
     const-string v0, "SSLv3"
 
     invoke-virtual {p0, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
@@ -236,27 +181,52 @@
 
     goto :goto_1
 
+    :sswitch_2
+    const-string v0, "TLSv1.3"
+
+    invoke-virtual {p0, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v0
+
+    if-eqz v0, :cond_0
+
+    const/4 v0, 0x0
+
+    goto :goto_1
+
+    :sswitch_3
+    const-string v0, "TLSv1.2"
+
+    invoke-virtual {p0, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v0
+
+    if-eqz v0, :cond_0
+
+    const/4 v0, 0x1
+
+    goto :goto_1
+
+    :sswitch_4
+    const-string v0, "TLSv1.1"
+
+    invoke-virtual {p0, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v0
+
+    if-eqz v0, :cond_0
+
+    const/4 v0, 0x2
+
+    goto :goto_1
+
     :goto_0
     const/4 v0, -0x1
 
     :goto_1
-    if-eqz v0, :cond_7
-
-    if-eq v0, v5, :cond_6
-
-    if-eq v0, v4, :cond_5
-
-    if-eq v0, v3, :cond_4
-
-    if-ne v0, v2, :cond_3
-
-    .line 47
-    sget-object v0, Lokhttp3/TlsVersion;->SSL_3_0:Lokhttp3/TlsVersion;
-
-    return-object v0
+    packed-switch v0, :pswitch_data_0
 
     .line 49
-    :cond_3
     new-instance v0, Ljava/lang/IllegalArgumentException;
 
     new-instance v1, Ljava/lang/StringBuilder;
@@ -267,11 +237,7 @@
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v1
-
     invoke-virtual {v1, p0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v1
 
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -281,34 +247,49 @@
 
     throw v0
 
+    .line 47
+    :pswitch_0
+    sget-object v0, Lokhttp3/TlsVersion;->SSL_3_0:Lokhttp3/TlsVersion;
+
+    return-object v0
+
     .line 45
-    :cond_4
+    :pswitch_1
     sget-object v0, Lokhttp3/TlsVersion;->TLS_1_0:Lokhttp3/TlsVersion;
 
     return-object v0
 
     .line 43
-    :cond_5
+    :pswitch_2
     sget-object v0, Lokhttp3/TlsVersion;->TLS_1_1:Lokhttp3/TlsVersion;
 
     return-object v0
 
     .line 41
-    :cond_6
+    :pswitch_3
     sget-object v0, Lokhttp3/TlsVersion;->TLS_1_2:Lokhttp3/TlsVersion;
 
     return-object v0
 
     .line 39
-    :cond_7
+    :pswitch_4
     sget-object v0, Lokhttp3/TlsVersion;->TLS_1_3:Lokhttp3/TlsVersion;
 
     return-object v0
 
-    nop
+    :sswitch_data_0
+    .sparse-switch
+        -0x1dfc3f27 -> :sswitch_4
+        -0x1dfc3f26 -> :sswitch_3
+        -0x1dfc3f25 -> :sswitch_2
+        0x4b88569 -> :sswitch_1
+        0x4c38896 -> :sswitch_0
+    .end sparse-switch
 
     :pswitch_data_0
-    .packed-switch -0x1dfc3f27
+    .packed-switch 0x0
+        :pswitch_4
+        :pswitch_3
         :pswitch_2
         :pswitch_1
         :pswitch_0

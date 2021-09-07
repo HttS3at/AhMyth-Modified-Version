@@ -2113,19 +2113,17 @@
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
+    new-instance v1, Ljava/util/Date;
+
+    iget-wide v2, p0, Lokhttp3/Cookie;->expiresAt:J
+
+    invoke-direct {v1, v2, v3}, Ljava/util/Date;-><init>(J)V
+
+    invoke-static {v1}, Lokhttp3/internal/http/HttpDate;->format(Ljava/util/Date;)Ljava/lang/String;
+
     move-result-object v1
 
-    new-instance v2, Ljava/util/Date;
-
-    iget-wide v3, p0, Lokhttp3/Cookie;->expiresAt:J
-
-    invoke-direct {v2, v3, v4}, Ljava/util/Date;-><init>(J)V
-
-    invoke-static {v2}, Lokhttp3/internal/http/HttpDate;->format(Ljava/util/Date;)Ljava/lang/String;
-
-    move-result-object v2
-
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     .line 555
     :cond_1
@@ -2159,11 +2157,9 @@
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object v1
+    iget-object v1, p0, Lokhttp3/Cookie;->path:Ljava/lang/String;
 
-    iget-object v2, p0, Lokhttp3/Cookie;->path:Ljava/lang/String;
-
-    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     .line 565
     iget-boolean v1, p0, Lokhttp3/Cookie;->secure:Z

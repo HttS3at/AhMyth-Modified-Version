@@ -46,62 +46,21 @@
 
     move-result v0
 
-    const/16 v1, 0xc8
+    const/4 v1, 0x0
 
-    const/4 v2, 0x0
+    sparse-switch v0, :sswitch_data_0
 
-    if-eq v0, v1, :cond_2
-
-    const/16 v1, 0x19a
-
-    if-eq v0, v1, :cond_2
-
-    const/16 v1, 0x19e
-
-    if-eq v0, v1, :cond_2
-
-    const/16 v1, 0x1f5
-
-    if-eq v0, v1, :cond_2
-
-    const/16 v1, 0xcb
-
-    if-eq v0, v1, :cond_2
-
-    const/16 v1, 0xcc
-
-    if-eq v0, v1, :cond_2
-
-    const/16 v1, 0x133
-
-    if-eq v0, v1, :cond_0
-
-    const/16 v1, 0x134
-
-    if-eq v0, v1, :cond_2
-
-    const/16 v1, 0x194
-
-    if-eq v0, v1, :cond_2
-
-    const/16 v1, 0x195
-
-    if-eq v0, v1, :cond_2
-
-    packed-switch v0, :pswitch_data_0
-
-    goto :goto_0
+    goto :goto_1
 
     .line 85
-    :cond_0
-    :pswitch_0
+    :sswitch_0
     const-string v0, "Expires"
 
     invoke-virtual {p0, v0}, Lokhttp3/Response;->header(Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object v0
 
-    if-nez v0, :cond_3
+    if-nez v0, :cond_0
 
     .line 86
     invoke-virtual {p0}, Lokhttp3/Response;->cacheControl()Lokhttp3/CacheControl;
@@ -112,9 +71,9 @@
 
     move-result v0
 
-    const/4 v1, -0x1
+    const/4 v2, -0x1
 
-    if-ne v0, v1, :cond_3
+    if-ne v0, v2, :cond_0
 
     .line 87
     invoke-virtual {p0}, Lokhttp3/Response;->cacheControl()Lokhttp3/CacheControl;
@@ -125,7 +84,7 @@
 
     move-result v0
 
-    if-nez v0, :cond_3
+    if-nez v0, :cond_0
 
     .line 88
     invoke-virtual {p0}, Lokhttp3/Response;->cacheControl()Lokhttp3/CacheControl;
@@ -136,24 +95,18 @@
 
     move-result v0
 
-    if-eqz v0, :cond_1
+    if-eqz v0, :cond_2
 
     .line 89
-    goto :goto_1
-
-    .line 95
-    :cond_1
-    :goto_0
-    return v2
+    goto :goto_0
 
     .line 78
-    :cond_2
-    :pswitch_1
+    :sswitch_1
     nop
 
     .line 99
-    :cond_3
-    :goto_1
+    :cond_0
+    :goto_0
     invoke-virtual {p0}, Lokhttp3/Response;->cacheControl()Lokhttp3/CacheControl;
 
     move-result-object v0
@@ -162,7 +115,7 @@
 
     move-result v0
 
-    if-nez v0, :cond_4
+    if-nez v0, :cond_1
 
     invoke-virtual {p1}, Lokhttp3/Request;->cacheControl()Lokhttp3/CacheControl;
 
@@ -172,19 +125,34 @@
 
     move-result v0
 
-    if-nez v0, :cond_4
+    if-nez v0, :cond_1
 
-    const/4 v2, 0x1
+    const/4 v1, 0x1
 
-    :cond_4
-    return v2
+    :cond_1
+    return v1
+
+    .line 95
+    :cond_2
+    :goto_1
+    return v1
 
     nop
 
-    :pswitch_data_0
-    .packed-switch 0x12c
-        :pswitch_1
-        :pswitch_1
-        :pswitch_0
-    .end packed-switch
+    :sswitch_data_0
+    .sparse-switch
+        0xc8 -> :sswitch_1
+        0xcb -> :sswitch_1
+        0xcc -> :sswitch_1
+        0x12c -> :sswitch_1
+        0x12d -> :sswitch_1
+        0x12e -> :sswitch_0
+        0x133 -> :sswitch_0
+        0x134 -> :sswitch_1
+        0x194 -> :sswitch_1
+        0x195 -> :sswitch_1
+        0x19a -> :sswitch_1
+        0x19e -> :sswitch_1
+        0x1f5 -> :sswitch_1
+    .end sparse-switch
 .end method

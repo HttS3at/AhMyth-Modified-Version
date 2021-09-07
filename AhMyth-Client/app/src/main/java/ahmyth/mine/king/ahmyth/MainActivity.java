@@ -48,7 +48,11 @@ public class MainActivity extends Activity {
             startActivity(intent);
         }
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED){
+        if (
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED
+        ){
             Intent mIntent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
             mIntent.setData(Uri.parse("package:"+getPackageName()));
             startActivity(mIntent);
