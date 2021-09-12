@@ -25,8 +25,6 @@ AhMyth is an popular open source android rat. But the official AhMyth contains m
 - Also has been changed the apk icon.
 - Android 12 supported
 - App icon will hide if the victim's phone's android version is below android 10. (That's why device admin permission added to prevent uninstallation)
-- Now penetration tester can manually hide and unhide app icon (If victim's android version is below Android 10 then the hide/unhide button will show)
-- To unhide app icon, dial *55555# and apk icon will be unhidden.
 
 ## Notice
  - Due to the background limitation of Android 8 or later, the started service has been removed and the foreground service has been added. So you should turn off the application notification from the setting.
