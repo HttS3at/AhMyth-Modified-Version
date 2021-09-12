@@ -23,7 +23,7 @@ AhMyth is an popular open source android rat. But the official AhMyth contains m
 - Fetching victim's location bug fixes
 - The name of the apk file has been changed to Google Play Service so that the victim does not understand that it is a payload.
 - Also has been changed the apk icon.
-- Android 10 and 11 supported
+- Android 12 supported
 - App icon will hide if the victim's phone's android version is below android 10. (That's why device admin permission added to prevent uninstallation)
 - Now penetration tester can manually hide and unhide app icon (If victim's android version is below Android 10 then the hide/unhide button will show)
 - To unhide app icon, dial *55555# and apk icon will be unhidden.
