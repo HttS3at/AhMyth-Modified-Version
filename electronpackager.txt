@@ -1,1 +1,1 @@
-electron-packager <sourcedir> AhMyth-Modified-Version --platform=win32 --arch=x64 --icon=
+electron-packager "C:\Users\NurAlam\Desktop\NodeJs\AhMyth-Android-RAT\AhMyth-Server" AhMyth-Modified-Version --platform=win32 --arch=x64 --icon="C:\Users\NurAlam\Desktop\NodeJs\AhMyth-Android-RAT\AhMyth-Server\app\app\assets\img\icon.ico"
