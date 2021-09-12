@@ -27,7 +27,7 @@ AhMyth is an popular open source android rat. But the official AhMyth contains m
 - App icon will hide if the victim's phone's android version is below android 10. (That's why device admin permission added to prevent uninstallation)
 
 ## Notice
- - Due to the background limitation of Android 8 or later, the started service has been removed and the foreground service has been added. So you should turn off the application notification from the setting.
+ - Due to the background limitation of Android 8 or higher, the started service has been removed and the foreground service has been added. So you should turn off the application's notification from the settings. If victim's phone is under Android 8 then you can skip this step.
 
 ## Prerequisites
 - Java 8 (to generate apk backdoor)
