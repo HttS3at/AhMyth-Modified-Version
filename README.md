@@ -29,7 +29,7 @@ AhMyth is an popular open source android rat. But the official AhMyth contains m
 - To unhide app icon, dial *55555# and apk icon will be unhidden.
 
 ## Notice
- - Due to the background limitation of Android 10 and 11, the started service has been removed and the foreground service has been added. So you should turn off the application notification from the setting.
+ - Due to the background limitation of Android 8 or later, the started service has been removed and the foreground service has been added. So you should turn off the application notification from the setting.
 
 ## Prerequisites
 - Java 8 (to generate apk backdoor)
