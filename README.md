@@ -3,7 +3,7 @@
 AhMyth is an popular open source android rat. But the official AhMyth contains many bugs. For an example, you can't fetch victim's files from the remote server using official AhMyth. So that we have modified the rat and remove all bugs and also added some extra features. 
 
 (Please star ⭐ mark this project to support)
-<Please guys use this project for good purpose only>
+(Please guys use this project for good purpose only. Otherwise I will remove this project from from my repository.)
 
 ### It consists of two parts :
 
